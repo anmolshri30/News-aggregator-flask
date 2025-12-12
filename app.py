@@ -69,3 +69,10 @@ def home():
 if __name__ == "__main__":
     update_news()  # Initial fetch
     app.run(debug=True)
+
+from flask import send_from_directory
+import os
+
+@app.route('/f70d03fedff298bb7599.txt')
+def hilltopads_verify():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'f70d03fedff298bb7599.txt')
