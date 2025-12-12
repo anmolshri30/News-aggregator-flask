@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ article['title'] }}</title>
+  <!-- Place AdSense head snippet here as needed -->
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1><a href="/">Global News Aggregator</a></h1>
+  </header>
+
+  <main class="article-page">
+    <article>
+      <h2>{{ article['title'] }}</h2>
+      <p class="meta">{{ article['source'] }} • {{ article['published'] }}</p>
+      <p>{{ article['summary'] }}</p>
+      <p><a href="{{ article['link'] }}" target="_blank">Open original</a></p>
+    </article>
+
+    <aside class="ads">
+      <!-- Article page ad slot (replace with AdSense unit) -->
+    </aside>
+  </main>
+
+  <footer>
+    <p>Aggregator • Auto-updating</p>
+  </footer>
+</body>
+</html>
