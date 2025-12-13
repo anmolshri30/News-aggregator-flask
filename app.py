@@ -3,7 +3,7 @@ from fetcher import fetch_news
 
 app = Flask(__name__)
 
-categories = ["technology", "sports", "world"]
+categories = ["technology", "sports", "world", "stocks"]
 
 @app.route("/")
 def home():

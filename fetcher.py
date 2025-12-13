@@ -3,8 +3,9 @@ import feedparser
 def fetch_news():
     feeds = {
         "technology": "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
-        "sports": "https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml",
-        "world": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+        "sports": "https://www.espn.com/espn/rss/news",  # Fixed sports feed
+        "world": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+        "stocks": "https://www.investing.com/rss/news.rss"  # New stocks feed
     }
 
     all_articles = []

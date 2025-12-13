@@ -8,7 +8,7 @@
 <style>
 body { background-color: #1a202c; color: #edf2f7; }
 a { color: #63b3ed; }
-.sticky-ad { position: fixed; top: 20px; width: 120px; }
+.sticky-ad { position: fixed; top: 20px; width: 120px; z-index: 9999; }
 .left-ad { left: 10px; }
 .right-ad { right: 10px; }
 .article { background-color: #2d3748; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; }
@@ -16,15 +16,15 @@ a { color: #63b3ed; }
 </head>
 <body class="font-sans">
 
-<!-- Sticky Ads -->
+<!-- Left Sticky Ad -->
 <div class="sticky-ad left-ad">
 <script>
-(function(nilao){
+(function(utbs){
 var d = document,
     s = d.createElement('script'),
     l = d.scripts[d.scripts.length - 1];
-s.settings = nilao || {};
-s.src = "//buttery-cause.com/bHX.V/s/dVG/lR0/Y/WVci/Keemr9kuKZxUHl/kvPVTIY/3fMTj/Ytw_N/DQAitQN/jbcayQNvjMA_0fMzQT";
+s.settings = utbs || {};
+s.src = "//buttery-cause.com/b-X.VIsadVGJlN0yY-WkcL/xebmo9zuYZ/UWlvkXPQTtYO3RMtjmY-wENQDVAYtTNkjFcby/NAjLAP0sMUQj";
 s.async = true;
 s.referrerPolicy = 'no-referrer-when-downgrade';
 l.parentNode.insertBefore(s, l);
@@ -32,14 +32,15 @@ l.parentNode.insertBefore(s, l);
 </script>
 </div>
 
+<!-- Right Sticky Ad -->
 <div class="sticky-ad right-ad">
 <script>
-(function(phgj){
+(function(rud){
 var d = document,
     s = d.createElement('script'),
     l = d.scripts[d.scripts.length - 1];
-s.settings = phgj || {};
-s.src = "//buttery-cause.com/bfXeV.s/d/GEl_0/YUWUcG/segmr9/u-ZcUElukVP/T/YU3GMTjhYFwwMcjLElt/NZjIc/ySNvj/AyyTMNgg";
+s.settings = rud || {};
+s.src = "//buttery-cause.com/b.XDVEsgdiGDlD0/YjWWcv/qeMm/9CupZJU/lZkNPDT/YS3FMQjHY_wGM/jRE/tbNMjecHyCNKjiAoyDMGgj";
 s.async = true;
 s.referrerPolicy = 'no-referrer-when-downgrade';
 l.parentNode.insertBefore(s, l);
@@ -53,7 +54,7 @@ l.parentNode.insertBefore(s, l);
 </header>
 
 <!-- Categories -->
-<nav class="flex justify-center space-x-4 mb-6">
+<nav class="flex justify-center space-x-4 mb-6 flex-wrap">
     <a href="/" class="px-3 py-1 rounded {{ 'bg-blue-600' if active_category=='All' else 'bg-gray-700' }}">All</a>
     {% for cat in categories %}
     <a href="/category/{{ cat }}" class="px-3 py-1 rounded {{ 'bg-blue-600' if active_category==cat else 'bg-gray-700' }}">{{ cat.title() }}</a>
@@ -61,7 +62,7 @@ l.parentNode.insertBefore(s, l);
 </nav>
 
 <!-- Articles -->
-<div class="max-w-4xl mx-auto">
+<div class="max-w-4xl mx-auto px-4">
     {% if articles %}
         {% for article in articles %}
         <div class="article">
