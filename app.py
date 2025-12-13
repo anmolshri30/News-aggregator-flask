@@ -1,38 +1,18 @@
-import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from fetcher import fetch_news
 
 app = Flask(__name__)
 
-# ================================
-# Routes
-# ================================
+@app.route('/')
+def home():
+    news = fetch_news()  # fetch all news
+    return render_template('index.html', news=news)
 
-@app.route("/")
-def index():
-    category = request.args.get("category", "top")
-    news = fetch_news(category)
-    return render_template(
-        "index.html",
-        news=news,
-        category=category,
-        site_name="A.I.O Global News"
-    )
+@app.route('/category/<category_name>')
+def category(category_name):
+    all_news = fetch_news()
+    category_news = [article for article in all_news if article['category'].lower() == category_name.lower()]
+    return render_template('index.html', news=category_news)
 
-# Debug route to verify backend fetching
-@app.route("/debug")
-def debug():
-    return fetch_news("top")
-
-# HilltopAds verification file
-@app.route("/f70d03fedff298bb7599.txt")
-def hilltop_verify():
-    return "f70d03fedff298bb7599"
-
-# ================================
-# Gunicorn / Render Entry
-# ================================
-
-# IMPORTANT:
-# ❌ Do NOT add app.run()
-# Gunicorn handles the server
+if __name__ == '__main__':
+    app.run(debug=True)

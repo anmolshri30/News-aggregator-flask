@@ -1,88 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIO-Global News</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIO-GLOBAL NEWS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-gray-900 text-white">
 
-    <!-- Navbar -->
-    <header class="bg-gray-800 p-4 flex justify-between items-center shadow-md">
-        <h1 class="text-2xl font-bold">AIO-Global News</h1>
-        <nav class="space-x-4">
-            <a href="/" class="hover:text-blue-400">Home</a>
-            <a href="/category/world" class="hover:text-blue-400">World</a>
-            <a href="/category/technology" class="hover:text-blue-400">Technology</a>
-            <a href="/category/sports" class="hover:text-blue-400">Sports</a>
-            <a href="/category/business" class="hover:text-blue-400">Business</a>
-        </nav>
-    </header>
+  <!-- Sticky Left Ad -->
+  <div class="fixed top-0 left-0 h-full w-20 bg-gray-800 flex items-center justify-center">
+    <script>
+      (function(nilao){
+        var d = document,
+            s = d.createElement('script'),
+            l = d.scripts[d.scripts.length - 1];
+        s.settings = nilao || {};
+        s.src = "//buttery-cause.com/bHX.V/s/dVG/lR0/Y/WVci/Keemr9kuKZxUHl/kvPVTIY/3fMTj/Ytw_N/DQAitQN/jbcayQNvjMA_0fMzQT";
+        s.async = true;
+        s.referrerPolicy = 'no-referrer-when-downgrade';
+        l.parentNode.insertBefore(s, l);
+      })({})
+    </script>
+  </div>
 
-    <!-- Main container with side ads -->
-    <div class="max-w-7xl mx-auto flex mt-6 px-4 gap-6">
+  <!-- Sticky Right Ad -->
+  <div class="fixed top-0 right-0 h-full w-20 bg-gray-800 flex items-center justify-center">
+    <script>
+      (function(nilao){
+        var d = document,
+            s = d.createElement('script'),
+            l = d.scripts[d.scripts.length - 1];
+        s.settings = nilao || {};
+        s.src = "//buttery-cause.com/bHX.V/s/dVG/lR0/Y/WVci/Keemr9kuKZxUHl/kvPVTIY/3fMTj/Ytw_N/DQAitQN/jbcayQNvjMA_0fMzQT";
+        s.async = true;
+        s.referrerPolicy = 'no-referrer-when-downgrade';
+        l.parentNode.insertBefore(s, l);
+      })({})
+    </script>
+  </div>
 
-        <!-- Sticky Left-side ad -->
-        <aside class="w-60 flex-shrink-0">
-            <div class="bg-gray-800 p-4 rounded shadow-md sticky top-20">
-                <script>
-                (function(phgj){
-                    var d = document,
-                        s = d.createElement('script'),
-                        l = d.scripts[d.scripts.length - 1];
-                    s.settings = phgj || {};
-                    s.src = "//buttery-cause.com/bfXeV.s/d/GEl_0/YUWUcG/segmr9/u-ZcUElukVP/T/YU3GMTjhYFwwMcjLElt/NZjIc/ySNvj/AyyTMNgg";
-                    s.async = true;
-                    s.referrerPolicy = 'no-referrer-when-downgrade';
-                    l.parentNode.insertBefore(s, l);
-                })({})
-                </script>
-            </div>
-        </aside>
+  <!-- Main content -->
+  <div class="mx-auto max-w-5xl px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">AIO-GLOBAL NEWS</h1>
 
-        <!-- Main content -->
-        <main class="flex-1 space-y-6">
-            {% if news %}
-                {% for article in news %}
-                <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-2">{{ article.title }}</h2>
-                    {% if article.image %}
-                        <img src="{{ article.image }}" alt="{{ article.title }}" class="rounded mb-4 w-full">
-                    {% endif %}
-                    <p class="mb-2">{{ article.summary }}</p>
-                    <a href="{{ article.link }}" target="_blank" class="text-blue-400 font-bold hover:underline">Read more</a>
-                </div>
-                {% endfor %}
-            {% else %}
-                <p class="text-gray-400">No news available at the moment.</p>
-            {% endif %}
-        </main>
-
-        <!-- Sticky Right-side ad -->
-        <aside class="w-80 flex-shrink-0">
-            <div class="bg-gray-800 p-4 rounded shadow-md sticky top-20">
-                <script>
-                (function(nilao){
-                    var d = document,
-                        s = d.createElement('script'),
-                        l = d.scripts[d.scripts.length - 1];
-                    s.settings = nilao || {};
-                    s.src = "//buttery-cause.com/bHX.V/s/dVG/lR0/Y/WVci/Keemr9kuKZxUHl/kvPVTIY/3fMTj/Ytw_N/DQAitQN/jbcayQNvjMA_0fMzQT";
-                    s.async = true;
-                    s.referrerPolicy = 'no-referrer-when-downgrade';
-                    l.parentNode.insertBefore(s, l);
-                })({})
-                </script>
-            </div>
-        </aside>
-
+    <!-- Categories -->
+    <div class="flex gap-4 mb-8">
+      <a href="/category/world" class="px-4 py-2 bg-gray-800 rounded hover:bg-gray-700">World</a>
+      <a href="/category/technology" class="px-4 py-2 bg-gray-800 rounded hover:bg-gray-700">Technology</a>
+      <a href="/category/sports" class="px-4 py-2 bg-gray-800 rounded hover:bg-gray-700">Sports</a>
+      <a href="/category/business" class="px-4 py-2 bg-gray-800 rounded hover:bg-gray-700">Business</a>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 mt-6 p-4 text-center text-gray-400">
-        &copy; 2025 AIO-Global News. All rights reserved.
-    </footer>
+    <!-- Articles -->
+    <div class="grid md:grid-cols-2 gap-6">
+      {% for article in news %}
+      <div class="bg-gray-800 p-4 rounded shadow hover:shadow-lg transition">
+        {% if article.image %}
+        <img src="{{ article.image }}" alt="{{ article.title }}" class="mb-4 rounded w-full h-48 object-cover">
+        {% endif %}
+        <h2 class="text-xl font-semibold mb-2">{{ article.title }}</h2>
+        <p class="text-gray-300 mb-2">{{ article.summary|safe }}</p>
+        <a href="{{ article.link }}" target="_blank" class="text-blue-400 hover:underline">Read more</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 
 </body>
 </html>
