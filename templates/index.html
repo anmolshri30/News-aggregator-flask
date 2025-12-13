@@ -6,10 +6,10 @@
     <title>AIO-GLOBAL NEWS</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-gray-900 text-white font-sans relative">
 
 <!-- Sticky Left Ad -->
-<div class="fixed top-0 left-0 h-full w-16 md:w-20 flex items-center justify-center z-50 bg-gray-900">
+<div class="fixed top-0 left-0 h-full w-16 md:w-20 flex items-center justify-center z-10 bg-gray-900">
     <script>
     (function(nilao){
         var d = document,
@@ -25,7 +25,7 @@
 </div>
 
 <!-- Sticky Right Ad -->
-<div class="fixed top-0 right-0 h-full w-16 md:w-20 flex items-center justify-center z-50 bg-gray-900">
+<div class="fixed top-0 right-0 h-full w-16 md:w-20 flex items-center justify-center z-10 bg-gray-900">
     <script>
     (function(nilao){
         var d = document,
@@ -41,7 +41,7 @@
 </div>
 
 <!-- Main Container -->
-<div class="ml-20 mr-20 md:ml-24 md:mr-24 p-4">
+<div class="ml-20 md:ml-24 mr-20 md:mr-24 p-4 z-0 relative">
 
     <!-- Header -->
     <header class="mb-6">
@@ -49,25 +49,29 @@
     </header>
 
     <!-- Categories -->
-    <nav class="mb-6 flex justify-center space-x-4 flex-wrap">
+    <nav class="mb-6 flex justify-center space-x-4 flex-wrap z-0 relative">
         {% for category in categories %}
         <a href="/category/{{ category }}" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded transition">{{ category }}</a>
         {% endfor %}
     </nav>
 
     <!-- Articles -->
-    <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for article in articles %}
-        <div class="bg-gray-800 rounded shadow hover:shadow-lg transition overflow-hidden">
-            <img src="{{ article.image }}" alt="{{ article.title }}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h2 class="font-bold text-xl mb-2">{{ article.title }}</h2>
-                <p class="text-gray-300 text-sm mb-2">{{ article.published }}</p>
-                <p class="text-gray-200">{{ article.summary }}</p>
-                <a href="{{ article.link }}" target="_blank" class="mt-2 inline-block text-blue-400 hover:text-blue-300">Read more</a>
+    <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 z-0 relative">
+        {% if articles %}
+            {% for article in articles %}
+            <div class="bg-gray-800 rounded shadow hover:shadow-lg transition overflow-hidden">
+                <img src="{{ article.image }}" alt="{{ article.title }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="font-bold text-xl mb-2">{{ article.title }}</h2>
+                    <p class="text-gray-300 text-sm mb-2">{{ article.published }}</p>
+                    <p class="text-gray-200">{{ article.summary }}</p>
+                    <a href="{{ article.link }}" target="_blank" class="mt-2 inline-block text-blue-400 hover:text-blue-300">Read more</a>
+                </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <p class="text-center text-gray-400 col-span-full">No articles available.</p>
+        {% endif %}
     </main>
 
 </div>
