@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     <meta charset="UTF-8">
-    <title>Global News</title>
+    <title>AIO-Global News</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -11,7 +12,7 @@
 
 <!-- ================= HEADER ================= -->
 <header class="navbar">
-    <h1>Global News</h1>
+    <h1>AIO-Global News</h1>
     <nav>
         <a href="/?category=general" data-cat="general">Home</a>
         <a href="/?category=business" data-cat="business">Business</a>
@@ -107,33 +108,8 @@ l.parentNode.insertBefore(s,l);
 
 <!-- ================= FOOTER ================= -->
 <footer>
-    <p>© 2025 Global News. All rights reserved.</p>
+    <p>© 2025 AIO-Global News. All rights reserved.</p>
 </footer>
-
-<!-- ================= POPUP ON CATEGORY CHANGE ================= -->
-<script>
-(function () {
-    const params = new URLSearchParams(window.location.search);
-    const currentCategory = params.get("category") || "general";
-
-    const lastCategory = sessionStorage.getItem("lastCategory");
-
-    if (lastCategory && lastCategory !== currentCategory) {
-        setTimeout(() => {
-            (function(snkjvc){
-                var d=document,s=d.createElement('script'),l=d.scripts[d.scripts.length-1];
-                s.settings=snkjvc||{};
-                s.src="//hopeful-border.com/ciDI9.6Hb/2z5-lLSmWqQS9/NRj/c/yJN_jdAYzdMOiK0/2/Ncz-Im2tMBDJMpzC";
-                s.async=true;
-                s.referrerPolicy='no-referrer-when-downgrade';
-                l.parentNode.insertBefore(s,l);
-            })({});
-        }, 1200); // delay improves CTR
-    }
-
-    sessionStorage.setItem("lastCategory", currentCategory);
-})();
-</script>
 
 </body>
 </html>
