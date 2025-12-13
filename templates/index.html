@@ -1,79 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIO-GLOBAL NEWS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIO-Global News</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body { background-color: #1a202c; color: #edf2f7; }
+a { color: #63b3ed; }
+.sticky-ad { position: fixed; top: 20px; width: 120px; }
+.left-ad { left: 10px; }
+.right-ad { right: 10px; }
+.article { background-color: #2d3748; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+</style>
 </head>
-<body class="bg-gray-900 text-white font-sans relative">
+<body class="font-sans">
 
-<!-- Sticky Left Ad -->
-<div class="fixed top-0 left-0 h-full w-16 md:w-20 flex items-center justify-center z-10 bg-gray-900">
-    <script>
-    (function(nilao){
-        var d = document,
-            s = d.createElement('script'),
-            l = d.scripts[d.scripts.length - 1];
-        s.settings = nilao || {};
-        s.src = "//buttery-cause.com/bHX.V/s/dVG/lR0/Y/WVci/Keemr9kuKZxUHl/kvPVTIY/3fMTj/Ytw_N/DQAitQN/jbcayQNvjMA_0fMzQT";
-        s.async = true;
-        s.referrerPolicy = 'no-referrer-when-downgrade';
-        l.parentNode.insertBefore(s, l);
-    })({})
-    </script>
+<!-- Sticky Ads -->
+<div class="sticky-ad left-ad">
+<script>
+(function(nilao){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = nilao || {};
+s.src = "//buttery-cause.com/bHX.V/s/dVG/lR0/Y/WVci/Keemr9kuKZxUHl/kvPVTIY/3fMTj/Ytw_N/DQAitQN/jbcayQNvjMA_0fMzQT";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
 </div>
 
-<!-- Sticky Right Ad -->
-<div class="fixed top-0 right-0 h-full w-16 md:w-20 flex items-center justify-center z-10 bg-gray-900">
-    <script>
-    (function(nilao){
-        var d = document,
-            s = d.createElement('script'),
-            l = d.scripts[d.scripts.length - 1];
-        s.settings = nilao || {};
-        s.src = "//buttery-cause.com/bHX.V/s/dVG/lR0/Y/WVci/Keemr9kuKZxUHl/kvPVTIY/3fMTj/Ytw_N/DQAitQN/jbcayQNvjMA_0fMzQT";
-        s.async = true;
-        s.referrerPolicy = 'no-referrer-when-downgrade';
-        l.parentNode.insertBefore(s, l);
-    })({})
-    </script>
+<div class="sticky-ad right-ad">
+<script>
+(function(phgj){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = phgj || {};
+s.src = "//buttery-cause.com/bfXeV.s/d/GEl_0/YUWUcG/segmr9/u-ZcUElukVP/T/YU3GMTjhYFwwMcjLElt/NZjIc/ySNvj/AyyTMNgg";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
 </div>
 
-<!-- Main Container -->
-<div class="ml-20 md:ml-24 mr-20 md:mr-24 p-4 z-0 relative">
+<!-- Header -->
+<header class="text-center py-6">
+    <h1 class="text-4xl font-bold">AIO-Global News</h1>
+</header>
 
-    <!-- Header -->
-    <header class="mb-6">
-        <h1 class="text-3xl md:text-4xl font-bold text-center">AIO-GLOBAL NEWS</h1>
-    </header>
+<!-- Categories -->
+<nav class="flex justify-center space-x-4 mb-6">
+    <a href="/" class="px-3 py-1 rounded {{ 'bg-blue-600' if active_category=='All' else 'bg-gray-700' }}">All</a>
+    {% for cat in categories %}
+    <a href="/category/{{ cat }}" class="px-3 py-1 rounded {{ 'bg-blue-600' if active_category==cat else 'bg-gray-700' }}">{{ cat.title() }}</a>
+    {% endfor %}
+</nav>
 
-    <!-- Categories -->
-    <nav class="mb-6 flex justify-center space-x-4 flex-wrap z-0 relative">
-        {% for category in categories %}
-        <a href="/category/{{ category }}" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded transition">{{ category }}</a>
+<!-- Articles -->
+<div class="max-w-4xl mx-auto">
+    {% if articles %}
+        {% for article in articles %}
+        <div class="article">
+            <img src="{{ article.image }}" alt="image" class="w-full h-48 object-cover rounded mb-2">
+            <h2 class="text-xl font-semibold mb-1">{{ article.title }}</h2>
+            <p class="text-gray-300 text-sm mb-2">{{ article.published }}</p>
+            <p class="mb-2">{{ article.summary | safe }}</p>
+            <a href="{{ article.link }}" target="_blank" class="underline">Read more</a>
+        </div>
         {% endfor %}
-    </nav>
-
-    <!-- Articles -->
-    <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 z-0 relative">
-        {% if articles %}
-            {% for article in articles %}
-            <div class="bg-gray-800 rounded shadow hover:shadow-lg transition overflow-hidden">
-                <img src="{{ article.image }}" alt="{{ article.title }}" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h2 class="font-bold text-xl mb-2">{{ article.title }}</h2>
-                    <p class="text-gray-300 text-sm mb-2">{{ article.published }}</p>
-                    <p class="text-gray-200">{{ article.summary }}</p>
-                    <a href="{{ article.link }}" target="_blank" class="mt-2 inline-block text-blue-400 hover:text-blue-300">Read more</a>
-                </div>
-            </div>
-            {% endfor %}
-        {% else %}
-            <p class="text-center text-gray-400 col-span-full">No articles available.</p>
-        {% endif %}
-    </main>
-
+    {% else %}
+        <p class="text-center">No articles found.</p>
+    {% endif %}
 </div>
 
 </body>
