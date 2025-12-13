@@ -1,29 +1,24 @@
-import requests
-import xml.etree.ElementTree as ET
+import feedparser
 
-def fetch_rss(url):
-    try:
-        headers = {"User-Agent": "Mozilla/5.0"}
-        response = requests.get(url, headers=headers, timeout=10)
-        if response.status_code != 200:
-            print(f"Failed to fetch {url}, status: {response.status_code}")
-            return []
+CATEGORY_FEEDS = {
+    "top": "https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en",
+    "business": "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-IN&gl=IN&ceid=IN:en",
+    "technology": "https://news.google.com/rss/headlines/section/topic/TECHNOLOGY?hl=en-IN&gl=IN&ceid=IN:en",
+    "entertainment": "https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT?hl=en-IN&gl=IN&ceid=IN:en",
+    "science": "https://news.google.com/rss/headlines/section/topic/SCIENCE?hl=en-IN&gl=IN&ceid=IN:en",
+    "sports": "https://news.google.com/rss/headlines/section/topic/SPORTS?hl=en-IN&gl=IN&ceid=IN:en",
+}
 
-        root = ET.fromstring(response.content)
-        items = []
-        for item in root.findall('.//item'):
-            title = item.find('title').text if item.find('title') is not None else "No Title"
-            link = item.find('link').text if item.find('link') is not None else "#"
-            pub = item.find('pubDate').text if item.find('pubDate') is not None else ""
-            desc = item.find('description').text if item.find('description') is not None else ""
-            items.append({
-                "title": title,
-                "link": link,
-                "pubDate": pub,
-                "description": desc
-            })
-        print(f"Fetched {len(items)} articles from {url}")
-        return items
-    except Exception as e:
-        print(f"Error fetching {url}: {e}")
-        return []
+def fetch_news(category="top", limit=20):
+    feed_url = CATEGORY_FEEDS.get(category, CATEGORY_FEEDS["top"])
+    feed = feedparser.parse(feed_url)
+
+    articles = []
+    for entry in feed.entries[:limit]:
+        articles.append({
+            "title": entry.title,
+            "link": entry.link,
+            "published": entry.get("published", "")
+        })
+
+    return articles
