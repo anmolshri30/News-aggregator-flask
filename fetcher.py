@@ -1,38 +1,56 @@
 import feedparser
-from datetime import datetime
 
-# Define RSS feeds for each category
 FEEDS = {
     "general": [
-        "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-        "https://www.reutersagency.com/feed/?best-topics=general-news"
+        "https://rss.cnn.com/rss/edition.rss",
+        "https://feeds.bbci.co.uk/news/rss.xml"
+    ],
+    "business": [
+        "https://feeds.bbci.co.uk/news/business/rss.xml",
+        "https://www.cnbc.com/id/10001147/device/rss/rss.html"
+    ],
+    "technology": [
+        "https://feeds.arstechnica.com/arstechnica/index",
+        "https://www.theverge.com/rss/index.xml"
     ],
     "sports": [
         "https://www.espn.com/espn/rss/news",
-        "https://www.skysports.com/rss/12040"
+        "https://feeds.bbci.co.uk/sport/rss.xml"
+    ],
+    "entertainment": [
+        "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml"
+    ],
+    "science": [
+        "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml"
     ],
     "stocks": [
-        "https://www.investing.com/rss/news.rss",
-        "https://www.marketwatch.com/rss/topstories"
+        "https://www.cnbc.com/id/15839135/device/rss/rss.html",
+        "https://feeds.marketwatch.com/marketwatch/topstories/"
     ]
 }
 
-def fetch_news():
+DEFAULT_IMAGE = "https://via.placeholder.com/400x200?text=News"
+
+def extract_image(entry):
+    if "media_content" in entry:
+        return entry.media_content[0].get("url", DEFAULT_IMAGE)
+    if "media_thumbnail" in entry:
+        return entry.media_thumbnail[0].get("url", DEFAULT_IMAGE)
+    return DEFAULT_IMAGE
+
+def fetch_news(category):
     articles = []
-    for category, urls in FEEDS.items():
-        for url in urls:
-            feed = feedparser.parse(url)
-            for entry in feed.entries[:10]:
-                # Some feeds might not have summary or image
-                summary = getattr(entry, "summary", "")
-                image = getattr(entry, "media_content", [{"url": ""}])[0]["url"] if hasattr(entry, "media_content") else ""
-                published = getattr(entry, "published", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-                articles.append({
-                    "title": entry.title,
-                    "link": entry.link,
-                    "summary": summary,
-                    "image": image,
-                    "category": category,
-                    "published": published
-                })
+
+    for feed_url in FEEDS.get(category, []):
+        feed = feedparser.parse(feed_url)
+
+        for entry in feed.entries[:10]:
+            articles.append({
+                "title": entry.get("title", "No title"),
+                "link": entry.get("link", "#"),
+                "summary": entry.get("summary", ""),
+                "image": extract_image(entry),
+                "source": feed.feed.get("title", "Unknown")
+            })
+
     return articles

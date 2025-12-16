@@ -1,68 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AIO-Global News</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <title>AIO-GLOBAL NEWS</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
-<body class="bg-gray-900 text-white">
-  <div class="flex">
-    <!-- Left Ad -->
-    <div class="w-1/12 sticky top-0 h-screen p-2">
-      <script>
-        (function(nilao){
-          var d = document, s = d.createElement('script'), l = d.scripts[d.scripts.length - 1];
-          s.settings = nilao || {};
-          s.src = "//buttery-cause.com/bHX.V/s/dVG/lR0/Y/WVci/Keemr9kuKZxUHl/kvPVTIY/3fMTj/Ytw_N/DQAitQN/jbcayQNvjMA_0fMzQT";
-          s.async = true;
-          s.referrerPolicy = 'no-referrer-when-downgrade';
-          l.parentNode.insertBefore(s, l);
-        })({})
-      </script>
-    </div>
 
-    <!-- Main Content -->
-    <div class="w-10/12 p-4">
-      <!-- Categories -->
-      <div class="flex space-x-4 mb-6">
-        <a href="/" class="px-3 py-1 bg-gray-800 rounded hover:bg-gray-700">All</a>
-        <a href="/category/general" class="px-3 py-1 bg-gray-800 rounded hover:bg-gray-700">General</a>
-        <a href="/category/sports" class="px-3 py-1 bg-gray-800 rounded hover:bg-gray-700">Sports</a>
-        <a href="/category/stocks" class="px-3 py-1 bg-gray-800 rounded hover:bg-gray-700">Stocks</a>
-      </div>
+<body class="bg-gray-900 text-white min-h-screen">
 
-      <!-- Articles Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for article in articles %}
-        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-          {% if article[4] %}
-          <img src="{{ article[4] }}" alt="{{ article[1] }}" class="w-full h-48 object-cover">
-          {% endif %}
-          <div class="p-4">
-            <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded">{{ article[5].capitalize() }}</span>
-            <a href="{{ article[2] }}" class="block text-lg font-bold mt-2 text-white hover:underline">{{ article[1] }}</a>
-            <p class="mt-1 text-gray-300 text-sm">{{ article[3] | truncate(120) }}</p>
-            <p class="mt-2 text-gray-400 text-xs">Published: {{ article[6] }}</p>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
+<header class="p-6 text-center border-b border-gray-700">
+    <h1 class="text-3xl font-bold tracking-wide">AIO-GLOBAL NEWS</h1>
+    <p class="text-gray-400 mt-2">Latest news from around the world</p>
+</header>
 
-    <!-- Right Ad -->
-    <div class="w-1/12 sticky top-0 h-screen p-2">
-      <script>
-        (function(utbs){
-          var d = document, s = d.createElement('script'), l = d.scripts[d.scripts.length - 1];
-          s.settings = utbs || {};
-          s.src = "//buttery-cause.com/b-X.VIsadVGJlN0yY-WkcL/xebmo9zuYZ/UWlvkXPQTtYO3RMtjmY-wENQDVAYtTNkjFcby/NAjLAP0sMUQj";
-          s.async = true;
-          s.referrerPolicy = 'no-referrer-when-downgrade';
-          l.parentNode.insertBefore(s, l);
-        })({})
-      </script>
-    </div>
-  </div>
+<!-- Categories -->
+<nav class="flex flex-wrap justify-center gap-3 p-4 bg-gray-800 sticky top-0 z-40">
+    {% for cat in ["general","business","technology","sports","entertainment","science","stocks"] %}
+        <a href="/?category={{ cat }}"
+           class="px-4 py-2 rounded-full text-sm font-medium
+           {% if active_category == cat %}
+               bg-blue-600 text-white
+           {% else %}
+               bg-gray-700 hover:bg-gray-600
+           {% endif %}">
+           {{ cat.capitalize() }}
+        </a>
+    {% endfor %}
+</nav>
+
+<!-- Layout -->
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6 p-6">
+
+    <!-- LEFT AD (sticky) -->
+    <aside class="hidden lg:block lg:col-span-1 sticky top-24">
+        <!-- AD CODE CAN BE PASTED HERE -->
+    </aside>
+
+    <!-- NEWS -->
+    <main class="lg:col-span-3 grid sm:grid-cols-2 gap-6">
+        {% if articles %}
+            {% for article in articles %}
+                <a href="{{ article.link }}" target="_blank"
+                   class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition">
+
+                    <img src="{{ article.image }}"
+                         class="w-full h-48 object-cover"
+                         onerror="this.src='https://via.placeholder.com/400x200?text=News'">
+
+                    <div class="p-4">
+                        <h2 class="text-lg font-semibold">
+                            {{ article.title }}
+                        </h2>
+                        <p class="text-gray-400 text-sm mt-2">
+                            {{ article.source }}
+                        </p>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <p class="text-gray-400">No news available.</p>
+        {% endif %}
+    </main>
+
+    <!-- RIGHT AD (sticky) -->
+    <aside class="hidden lg:block lg:col-span-1 sticky top-24">
+        <!-- AD CODE CAN BE PASTED HERE -->
+    </aside>
+
+</div>
+
+<footer class="text-center text-gray-500 text-sm p-4 border-t border-gray-700">
+    © 2025 AIO-GLOBAL NEWS
+</footer>
+
 </body>
 </html>
